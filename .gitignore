@@ -1,0 +1,7 @@
+mmdetection/work_dirs/*
+mmdetection/backbones/*
+mmdetection/*.out
+*/*.csv
+*.pth
+*/*.npy
+*.png
