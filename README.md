@@ -24,3 +24,17 @@
 coco_con_with_noise_l2
 faster_rcnn_r101_fpn_1x
 coco_65_15_default
+
+
+
+### Test 
+    MSCOCO
+
+        ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+
+    PASCALVOC
+        
+        ./tools/dist_test.sh configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth 8 --dataset voc --out voc_results.pkl  --zsd --syn_weights ../checkpoints/VOC/classifier_latest.pth
+
+    
+        ./tools/dist_test.sh configs/ilsvrc/faster_rcnn_r101_fpn_1x.py work_dirs/ILSVRC/epoch_12.pth 6 --out ilsrvc_results.pkl --dataset imagenet --zsd --syn_weights ../checkpoints/imagenet_0.6_1_0_1_w2v/classifier_best_
