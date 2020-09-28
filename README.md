@@ -5,7 +5,7 @@
 Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simultaneous localization and classification of previously unseen objects. It is arguably the most extreme case of learning with minimal supervision. we propose a symantically driven conditional feature generation module to synthesize visual features for unseen objects. 
 
 <!-- ### Feature Generation Pipeline -->
-    ![](images/pipeline.png)
+![](images/pipeline.png)
 
 
 ### Test 
