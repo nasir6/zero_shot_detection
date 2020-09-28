@@ -97,9 +97,7 @@ ssh -L 3000:localhost:3000 ubuntu@[server-ip]
 nohup jupyter notebook --ip 0.0.0.0 --port 3000 --no-browser --allow-root &
 
 ```
-<!-- scp -r /home/nasir/Downloads/download.tar ubuntu@172.31.20.106:code/mmdetection/data/ -->
 
-<!-- ./tools/dist_train.sh configs/retinanet_x101_64x4d_fpn_1x.py 8 --validate  -->
 
 For more details on Docker CE installation [docker-ce](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
