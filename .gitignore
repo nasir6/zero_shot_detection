@@ -6,3 +6,4 @@ mmdetection/*.out
 */*.npy
 *.png
 .DS_Store
+nocommitac.md
