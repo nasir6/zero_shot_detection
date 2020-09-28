@@ -25,9 +25,8 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 The following scripts for dfferents steps in the pipeline are for MSCOCO please see the respective files for more arguments. 
 ### 1. Train Detector
 
+    cd mmdetection
     /tools/dist_train.sh configs/retinanet_x101_64x4d_fpn_1x.py 8 --validate
-
-we use the following config files
 
 
 ### 2. extract features
@@ -41,6 +40,7 @@ we use the following config files
     ./script/train_coco_generator_65_15.sh
 
 ### Evaluate
+
     cd mmdetection
-    
         ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+
