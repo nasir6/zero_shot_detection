@@ -35,7 +35,7 @@ class TrainGAN():
         self.con_loss = SupConLoss()
         self.con_att_feats = AttFeatsCon()
 
-        self.unseen_classifier = loadUnseenWeights(opt.pretrain_classifier_unseen, self.unseen_classifier)
+        # self.unseen_classifier = loadUnseenWeights(opt.pretrain_classifier_unseen, self.unseen_classifier)
         self.classifier = ClsModel(num_classes=opt.nclass_all)
         self.classifier.cuda()
         self.classifier = loadFasterRcnnCLSHead(opt.pretrain_classifier, self.classifier)
