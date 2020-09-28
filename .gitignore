@@ -7,3 +7,4 @@ mmdetection/*.out
 *.png
 .DS_Store
 nocommitac.md
+__pycache__
