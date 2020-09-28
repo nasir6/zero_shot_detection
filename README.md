@@ -39,7 +39,7 @@ The following scripts for dfferents steps in the pipeline are for MSCOCO please 
 ### 3. Train Generator
     ./script/train_coco_generator_65_15.sh
 
-### Evaluate
+### 4. Evaluate
 
     cd mmdetection
         ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
