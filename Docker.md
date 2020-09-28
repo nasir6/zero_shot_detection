@@ -98,7 +98,6 @@ nohup jupyter notebook --ip 0.0.0.0 --port 3000 --no-browser --allow-root &
 
 ```
 
-
 For more details on Docker CE installation [docker-ce](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 
 For more details on Docker Nvidia installation [docker-nvidia](https://github.com/NVIDIA/nvidia-docker)

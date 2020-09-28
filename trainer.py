@@ -49,13 +49,14 @@ print('initializing GAN Trainer')
 
 start_epoch = 0
 
-if opt.netD and opt.netG:
-    start_epoch = trainFGGAN.load_checkpoint()
+
 
 seenDataset = FeaturesGAN(opt)
 trainFGGAN = TrainGAN(opt, attributes, unseen_attributes, unseen_att_labels, seen_feats_mean=seenDataset.features_mean, gen_type='FG')
 
-
+if opt.netD and opt.netG:
+    start_epoch = trainFGGAN.load_checkpoint()
+    
 for epoch in range(start_epoch, opt.nepoch):
     # features, labels = seenDataset.epochData(include_bg=False)
     features, labels = seenDataset.epochData(include_bg=True)

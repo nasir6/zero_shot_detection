@@ -11,11 +11,5 @@ python trainer.py --manualSeed 806 \
 --testsplit test_0.6_0.3 \
 --trainsplit train_0.6_0.3 \
 --lz_ratio 0 \
---outname checkpoints/VOC_con_0_0.1 \
+--outname checkpoints/VOC \
 --pretrain_classifier_unseen voc_fc_1024_300.pth \
-# --netD checkpoints/VOC_new_unseen_cls_10/disc_latest.pth \
-# --netG checkpoints/VOC_new_unseen_cls_10/gen_latest.pth
-
-
-# --pretrain_classifier mmdetection/voc_dict/epoch_4.pth \
-# --pretrain_classifier mmdetection/work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth \

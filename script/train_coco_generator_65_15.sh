@@ -11,8 +11,4 @@ python trainer.py --manualSeed 806 \
 --trainsplit train_default_0.6_0.3 \
 --classes_split 65_15 \
 --lz_ratio 0.0 \
---outname checkpoints/coco_65_15_default_noise_0.05 \
-
-# --netD checkpoints/coco_65_15_0.6_1_0_1/disc_latest.pth \
-# --netG checkpoints/coco_65_15_0.6_1_0_1/gen_latest.pth
-# split, th, ls, lu, lz test_default_0, test_con_0
+--outname checkpoints/coco_65_15 \

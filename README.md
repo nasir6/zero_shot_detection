@@ -21,14 +21,26 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 - matplotlib
 - numpy
 
-### Test 
-    MSCOCO
 
-        ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+The following scripts for dfferents steps in the pipeline are for MSCOCO please see the respective files for more arguments. 
+### 1. Train Detector
 
-    PASCALVOC
-        
-        ./tools/dist_test.sh configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth 8 --dataset voc --out voc_results.pkl  --zsd --syn_weights ../checkpoints/VOC/classifier_latest.pth
+    /tools/dist_train.sh configs/retinanet_x101_64x4d_fpn_1x.py 8 --validate
 
+we use the following config files
+
+
+### 2. extract features
+
+<!-- The exmaple script is for MSCOCO please see the mmdetection/tools/zero_shot_utils.py for more arguments. -->
+
+    cd mmdetection
+    python tools/zero_shot_utils.py configs/faster_rcnn_r101_fpn_1x.py --classes seen --load_from work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth --save_dir ../../data/coco --data_split train_default
+
+### 3. Train Generator
+    ./script/train_coco_generator_65_15.sh
+
+### Evaluate
+    cd mmdetection
     
-        ./tools/dist_test.sh configs/ilsvrc/faster_rcnn_r101_fpn_1x.py work_dirs/ILSVRC/epoch_12.pth 6 --out ilsrvc_results.pkl --dataset imagenet --zsd --syn_weights ../checkpoints/imagenet_0.6_1_0_1_w2v/classifier_best_
+        ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth

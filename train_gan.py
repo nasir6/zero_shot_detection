@@ -275,45 +275,25 @@ class TrainGAN():
             # --------------------------------------------
             # unseen start ************************************************************************************
             fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
-            unseenc_errG = self.opt.cls_weight_unseen * self.con_att_feats(fake_unseen_f.cuda(), fake_unseen_l.cuda())
+            # unseenc_errG = self.opt.cls_weight_unseen * self.con_att_feats(fake_unseen_f.cuda(), fake_unseen_l.cuda())
                 
-            # fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
+            fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
 
-            # unseenc_errG = self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
+            unseenc_errG = self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
 
-            # fake_unseen_f = fake_unseen_f[:,None,:]
-
-            # fake_unseen_f = fake_unseen_f.view(-1, 2, 1024)
-            # fake_unseen_l = fake_unseen_l.view(-1, 2)[:, 0]
             
-            # fake = fake.view(-1, 2, 1024)
-            # input_label = input_label.view(-1, 2)[:, 0]
-
-            # import pdb; pdb.set_trace()
-
-            # feats_all = torch.cat((fake_unseen_f, fake.cuda()))
-            # labels_all = torch.cat((fake_unseen_l, input_label.cuda()))
-
-            # feats_all = torch.from_numpy(np.concatenate((fake_unseen_f.data.cpu().numpy(), fake.data.cpu().numpy())))
-            # labels_all = torch.from_numpy(np.concatenate((fake_unseen_l.data.cpu().numpy(), input_label.cpu().data.numpy())))
-
-            # unseenc_errG = self.con_loss(Variable(feats_all).cuda(), Variable(labels_all).cuda())
-            # unseenc_errG = self.con_att_feats(Variable(feats_all).cuda(), Variable(labels_all).cuda())
-            # unseenc_errG = self.opt.cls_weight_unseen*unseenc_errG
-# self.con_att_feats
             
-            seen_con_err =  1.00 * self.con_real(fake, input_label)
+            # seen_con_err =  1.00 * self.con_real(fake, input_label)
 
             # ---------------------------------------------
             # unseen end ************************************************************************************
 
-            errG = -G_cost + unseenc_errG#+unseenc_errG c_errG + loss_lz 
-            # errG = -(G_cost + c_errG + loss_lz + unseenc_errG + seen_con_err)
+            errG = -G_cost + unseenc_errG + c_errG + loss_lz 
             errG.backward()
             self.optimizerG.step()        
             
             print(f"{self.gen_type} [{self.epoch+1:02}/{self.opt.nepoch:02}] [{i:06}/{int(self.ntrain)}] \
             D loss: {D_cost.data.item():.4f} G loss: {G_cost.data.item():.4f}, G SUM: {errG.data.item():.4f}  W dist: {Wasserstein_D.data.item():.4f} \
-            seen loss: {c_errG.data.item():.4f} sup con loss: {unseenc_errG.data.item():.4f} real vs fake con err: {seen_con_err.item():.4f} loss div: {loss_lz.item():0.4f}")
+            seen loss: {c_errG.data.item():.4f} unseen loss: {unseenc_errG.data.item():.4f} loss div: {loss_lz.item():0.4f}")
             
         self.netG.eval()

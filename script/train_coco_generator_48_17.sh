@@ -4,7 +4,7 @@ python trainer.py --manualSeed 806 \
 --nepoch 100 --nepoch_cls 15 --ngh 4096 --ndh 4096 --lambda1 10 --critic_iter 5 \
 --dataset coco --batch_size 32 --nz 300 --attSize 300 --resSize 1024 --gan_epoch_budget 38000 \
 --lr 0.0001 --lr_step 30 --lr_cls 0.0001 \
---outname checkpoints/coco_48_17_0.6_0.1_0_0.1 \
+--outname checkpoints/coco_48_17 \
 --pretrain_classifier mmdetection/cp_48_17/epoch_12.pth \
 --pretrain_classifier_unseen coco_48_17_fc_1024_300.pth \
 --class_embedding MSCOCO/fasttext.npy \
