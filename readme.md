@@ -1,25 +1,21 @@
 
 
-<!-- ./tools/dist_train.sh configs/faster_rcnn_r101_fpn_1x.py 8 --validate --eval_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x/syn_feat.pth -->
+# This is implementstion of Synthesising the unseen for zero shot object detection.
 
-<!-- python tools/zero_shot_utils.py  configs/faster_rcnn_r101_fpn_1x.py --extract_feats_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x/syn_feat.pth -->
-<!-- extract feats -->
-<!-- python tools/zero_shot_utils.py  configs/faster_rcnn_r101_fpn_1x.py --extract_feats_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth  -->
+Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simultaneous localization and classification of previously unseen objects. It is arguably the most extreme case of learning with minimal supervision. we propose a symantically driven conditional feature generation module to synthesize visual features for unseen objects. 
 
-./tools/dist_train.sh configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py 2 --validate --eval_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth --syn_weights /raid/mun/codes/zero_shot_detection/cvpr18xian_pascal_voc/checkpoints/VOC/classifier_best.pth
-
-./tools/dist_train.sh configs/faster_rcnn_r101_fpn_1x.py 1 --validate --eval_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth --syn_weights /raid/mun/codes/zero_shot_detection/cvpr18xian_pascal_voc/checkpoints/coco/classifier_best.pth
-
-python tools/zero_shot_utils.py configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py --extract_feats_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth
-
-./tools/dist_train.sh configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py 8 --validate --eval_only --resume_from work_dirs/faster_rcnn_r101_fpn_1x_voc0712/syn_feats.pth
+<!-- ### Feature Generation Pipeline -->
+    ![TFeature Generation Pipeline](images/pipeline.png)
 
 
+### Test 
+    MSCOCO
 
+        ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
 
+    PASCALVOC
+        
+        ./tools/dist_test.sh configs/pascal_voc/faster_rcnn_r101_fpn_1x_voc0712.py work_dirs/faster_rcnn_r101_fpn_1x_voc0712/epoch_4.pth 8 --dataset voc --out voc_results.pkl  --zsd --syn_weights ../checkpoints/VOC/classifier_latest.pth
 
-
-
-
-
-
+    
+        ./tools/dist_test.sh configs/ilsvrc/faster_rcnn_r101_fpn_1x.py work_dirs/ILSVRC/epoch_12.pth 6 --out ilsrvc_results.pkl --dataset imagenet --zsd --syn_weights ../checkpoints/imagenet_0.6_1_0_1_w2v/classifier_best_
