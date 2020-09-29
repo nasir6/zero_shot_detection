@@ -22,7 +22,7 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 - numpy
 
 
-The following scripts for dfferents steps in the pipeline are for MSCOCO please see the respective files for more arguments. 
+The following scripts are for dfferents steps in the pipeline on MSCOCO dataset, please see the respective files for more arguments. 
 ### 1. Train Detector
 
     cd mmdetection
