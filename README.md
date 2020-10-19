@@ -13,6 +13,9 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 ![](images/module.png)
 
 
+### t-SNE Visualization
+
+![](images/tsne.png)
 
 ### Requirements
 - python 3.6
@@ -43,4 +46,33 @@ The following scripts for dfferents steps in the pipeline are for MSCOCO please 
 
     cd mmdetection
         ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+### Results
+- MSCOCO 
 
+    ![](images/coco_map.png)
+
+- MSCOCO Class Wise AP
+
+    ![](images/coco_class_ap.png)
+
+- ILSVRC
+
+    ![](images/ilsvrc.png)
+
+- PASCAL VOC
+
+    ![](images/voc.png)
+
+### Qualitative Results
+
+- Zero Shot Detections
+
+    ![](images/zsd_1.png) 
+    
+    ![](images/zsd_2.png)
+
+- Generalized Zero Shot Detections 
+
+    ![](images/gzsd_1.png)
+
+    ![](images/gzsd_2.png)
