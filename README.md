@@ -13,7 +13,7 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 ![](images/module.png)
 
 
-### t-SNE Visualization
+### t-SNE Visualization
 
 ![](images/tsne.png)
 
