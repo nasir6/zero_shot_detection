@@ -19,7 +19,7 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 
 ### Requirements
 - python 3.6
-- [mmdetection](https://github.com/open-mmlab/mmdetection)
+- [mmdetection](https://github.com/open-mmlab/mmdetection) we recommend using [Docker 2.0](Docker.md).  
 - pytorch
 - matplotlib
 - numpy
