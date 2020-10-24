@@ -3,8 +3,8 @@ mmdetection/backbones/*
 mmdetection/*.out
 */*.csv
 *.pth
-*/*.npy
-# *.png
+# */*.npy
+*.png
 .DS_Store
 nocommitac.md
 __pycache__
