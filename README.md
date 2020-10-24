@@ -13,13 +13,13 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 ![](images/module.png)
 
 
-### t-SNE Visualization
+### t-SNE Visualization
 
 ![](images/tsne.png)
 
 ### Requirements
 - python 3.6
-- [mmdetection](https://github.com/open-mmlab/mmdetection)
+- [mmdetection](https://github.com/open-mmlab/mmdetection) we recommend using [Docker 2.0](Docker.md).  
 - pytorch
 - matplotlib
 - numpy
@@ -29,7 +29,7 @@ The following scripts are for dfferents steps in the pipeline on MSCOCO dataset,
 ### 1. Train Detector
 
     cd mmdetection
-    /tools/dist_train.sh configs/retinanet_x101_64x4d_fpn_1x.py 8 --validate
+    /tools/dist_train.sh configs/faster_rcnn_r101_fpn_1x.py 8 --validate
 
 
 ### 2. extract features
