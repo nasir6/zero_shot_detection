@@ -76,3 +76,8 @@ The following scripts are for dfferents steps in the pipeline on MSCOCO dataset,
     ![](images/gzsd_1.png)
 
     ![](images/gzsd_2.png)
+
+
+<!-- conda install -c conda-forge scikit-build -->
+<!-- conda install -c conda-forge imgaug -->
+

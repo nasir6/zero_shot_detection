@@ -8,9 +8,11 @@ class ClsModel(nn.Module):
         super(ClsModel, self).__init__()
         self.fc1 = nn.Linear(in_features=1024, out_features=num_classes, bias=True)
         # self.relu = nn.ReLU(inplace=True)
+        self.lsm = nn.LogSoftmax(dim=1)
     def forward(self, feats=None, classifier_only=False):
         x = self.fc1(feats)
         # x = self.relu(self.fc1(feats))
+        x = self.lsm(x)
         return x
 
 class ClsUnseen(torch.nn.Module):

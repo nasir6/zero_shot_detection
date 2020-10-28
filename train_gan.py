@@ -33,7 +33,7 @@ class TrainGAN():
         self.unseen_classifier = ClsUnseen(unseenAtt)
         self.unseen_classifier.cuda()
         self.con_loss = SupConLoss()
-        self.con_att_feats = AttFeatsCon()
+        # self.con_att_feats = AttFeatsCon()
 
         # self.unseen_classifier = loadUnseenWeights(opt.pretrain_classifier_unseen, self.unseen_classifier)
         self.classifier = ClsModel(num_classes=opt.nclass_all)
@@ -274,12 +274,12 @@ class TrainGAN():
             c_errG = self.opt.cls_weight*c_errG
             # --------------------------------------------
             # unseen start ************************************************************************************
-            fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
+            # fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
             # unseenc_errG = self.opt.cls_weight_unseen * self.con_att_feats(fake_unseen_f.cuda(), fake_unseen_l.cuda())
                 
-            fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
+            # fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
 
-            unseenc_errG = self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
+            # unseenc_errG = self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
 
             
             
@@ -288,12 +288,12 @@ class TrainGAN():
             # ---------------------------------------------
             # unseen end ************************************************************************************
 
-            errG = -G_cost + unseenc_errG + c_errG + loss_lz 
+            errG = -G_cost + c_errG + loss_lz #+unseenc_errG
             errG.backward()
             self.optimizerG.step()        
-            
+            # unseen loss: {unseenc_errG.data.item():.4f}
             print(f"{self.gen_type} [{self.epoch+1:02}/{self.opt.nepoch:02}] [{i:06}/{int(self.ntrain)}] \
             D loss: {D_cost.data.item():.4f} G loss: {G_cost.data.item():.4f}, G SUM: {errG.data.item():.4f}  W dist: {Wasserstein_D.data.item():.4f} \
-            seen loss: {c_errG.data.item():.4f} unseen loss: {unseenc_errG.data.item():.4f} loss div: {loss_lz.item():0.4f}")
+            seen loss: {c_errG.data.item():.4f}  loss div: {loss_lz.item():0.4f}")
             
         self.netG.eval()

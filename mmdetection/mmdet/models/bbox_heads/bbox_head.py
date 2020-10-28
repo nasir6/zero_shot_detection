@@ -49,8 +49,8 @@ class BBoxHead(nn.Module):
 
         self.loss_cls = build_loss(loss_cls)
         self.loss_bbox = build_loss(loss_bbox)
-        self.contrastive_loss = SupConLoss()
-        self.contrastive_loss_att_feats = AttFeatsCon()
+        # self.contrastive_loss = SupConLoss()
+        # self.contrastive_loss_att_feats = AttFeatsCon()
 
         in_channels = self.in_channels
         if self.with_avg_pool:
@@ -129,9 +129,9 @@ class BBoxHead(nn.Module):
                 reduction_override=reduction_override)
             
             # import pdb; pdb.set_trace()
-            if feats_cls is not None:
+            # if feats_cls is not None:
                 # losses['loss_con'] = 0.1*self.contrastive_loss(feats_cls, labels)
-                losses['loss_att_feats_con'] = 1*self.contrastive_loss_att_feats(feats_cls, labels)
+                # losses['loss_att_feats_con'] = 1*self.contrastive_loss_att_feats(feats_cls, labels)
                 # self.contrastive_loss_att_feats 
             
             losses['acc'] = accuracy(cls_score, labels)

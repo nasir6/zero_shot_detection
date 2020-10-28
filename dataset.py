@@ -28,6 +28,7 @@ class FeaturesCls(Dataset):
             self.features = np.load(f"{self.root}/{self.opt.testsplit}_feats.npy")
             self.labels = np.load(f"{self.root}/{self.opt.testsplit}_labels.npy")
             print(f"{len(self.labels)} testsubset {self.opt.testsplit} features loaded")
+            # import pdb; pdb.set_trace()
     
     def replace(self, features=None, labels=None):
         self.features = features
@@ -68,13 +69,13 @@ class FeaturesGAN():
 
 
         self.features_mean = np.zeros((max(unique_labels) + 1 , self.all_features.shape[1]))
-        if path.exists(mean_path):
-            self.features_mean = np.load(mean_path)
-        else:
-            for label in unique_labels:
-                label_inds = np.where(self.all_labels==label)[0]
-                self.features_mean[label] = self.all_features[label_inds].mean(axis=0)
-            np.save(mean_path, self.features_mean)
+        # if path.exists(mean_path):
+        #     self.features_mean = np.load(mean_path)
+        # else:
+        #     for label in unique_labels:
+        #         label_inds = np.where(self.all_labels==label)[0]
+        #         self.features_mean[label] = self.all_features[label_inds].mean(axis=0)
+        #     np.save(mean_path, self.features_mean)
         
 
 
