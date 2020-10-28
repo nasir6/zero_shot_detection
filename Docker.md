@@ -1,3 +1,5 @@
+# skip docker installation if you already have Nvidia Docker 2.0 working and jump to line 68. 
+
 ## Install Docker CE and Nvidia Docker 2.0
 
 #### Uninstall old version
@@ -62,15 +64,11 @@ sudo pkill -SIGHUP dockerd
 docker run --runtime=nvidia --rm nvidia/cuda:9.0-devel nvidia-smi
 ```
 
-### Build docker image and run
+### Pull docker image for mmdetection
 
-#### To Build Image 
+#### Pull the base Image 
 ```sh
-# build or pull image from dockerhub repo.
-# If changes made to dockerfiles/Dockerfile.base file then re-build the base image otherwise build the library
-docker build -f dockerfiles/Dockerfile.base -t mmdetection:base .
-# Build  mmdetection library with latest tag
-docker build -t mmdetection:latest .
+docker pull nasir6/mmdetection:base
 ```
 
 #### To run 
@@ -79,13 +77,13 @@ docker build -t mmdetection:latest .
 
 # replace /home/ubuntu/code/ with path to the code directory
 
-docker run -p 3000:3000 -v /home/ubuntu/code/:/home -it --runtime=nvidia --rm mmdetection:latest
+docker run -p 3000:3000 -v /home/ubuntu/code/:/home -it --runtime=nvidia --rm nasir6/mmdetection:base
 
 cd mmdetection
+conda env create -f environment.yml
 python setup.py develop
-python tools/test.py configs/retinanet_x101_64x4d_fpn_1x.py \
-    checkpoints/retinanet_x101_64x4d_fpn_1x_20181218-a0a22662.pth \
-    --out results.pkl --eval bbox
+# to test the synthesized classifier on MSCOCO. 
+./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
 
 ```
 
