@@ -17,12 +17,9 @@ Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simult
 
 ![](images/tsne.png)
 
-### Requirements
-- python 3.6
-- [mmdetection](https://github.com/open-mmlab/mmdetection) we recommend using [Docker 2.0](Docker.md).  
-- pytorch
-- matplotlib
-- numpy
+### Set up the environment
+- [mmdetection](https://github.com/open-mmlab/mmdetection) we recommend using [Docker 2.0](Docker.md). Please use the mmdetection codes from this repo. 
+- conda env create -f environment.yml
 
 
 The following scripts are for dfferents steps in the pipeline on MSCOCO dataset, please see the respective files for more arguments. 
