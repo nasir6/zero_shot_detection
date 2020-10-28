@@ -4,6 +4,7 @@ mmdetection/*.out
 */*.csv
 *.pth
 # */*.npy
+*/*.pkl
 *.png
 */*.DS_Store
 ._*
