@@ -6,5 +6,6 @@ mmdetection/*.out
 # */*.npy
 *.png
 */*.DS_Store
+._*
 nocommitac.md
 __pycache__
