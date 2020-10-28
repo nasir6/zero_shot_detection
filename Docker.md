@@ -1,4 +1,4 @@
-# skip docker installation if you already have Nvidia Docker 2.0 working and jump to line 68. 
+# skip docker installation if you already have Nvidia Docker 2.0 working and [Pull Docker Image](dockerRun.md). 
 
 ## Install Docker CE and Nvidia Docker 2.0
 
