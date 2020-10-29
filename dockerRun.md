@@ -2,26 +2,28 @@
 
 #### Pull the base Image 
 ```sh
-docker pull nasir6/mmdetection:base
+docker pull nasir6/mmdetection:latest
 ```
 
 #### To run 
 
 ```sh
 
-# replace /home/ubuntu/code/ with path to the code directory
+# replace codes with path to the code directory
 
-docker run -p 3000:3000 -v /home/ubuntu/code/:/home -it --runtime=nvidia --rm nasir6/mmdetection:base
+docker run -p 3000:3000 -v codes/:/codes -it --runtime=nvidia --rm nasir6/mmdetection:latest
 
-cd mmdetection
-conda env create -f environment.yml
-python setup.py develop
+cd /codes/zero_shot_detection/mmdetection
+
 # to test the synthesized classifier on MSCOCO. 
-./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+
+test
+
+./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dir/coco2014/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
 
 ```
 
-### Run Jupyter notebook
+#### Run Jupyter notebook
 
 ```ssh
 ssh -L 3000:localhost:3000 ubuntu@[server-ip]

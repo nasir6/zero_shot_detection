@@ -4,7 +4,7 @@ split = '65_15'
 # split = '48_17'
 model = dict(
     type='FasterRCNN',
-    pretrained='/home/aditya/zsd_codes/zero_shot_detection/mmdetection/backbones/resnet101.pyth',
+    pretrained='./backbones/resnet101.pyth',
     backbone=dict(
         type='ResNet',
         depth=101,
@@ -107,7 +107,7 @@ test_cfg = dict(
 )
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/home/aditya/zsd_codes/data/coco2014/'
+data_root = '../../data/coco2014/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -187,7 +187,7 @@ log_config = dict(
 total_epochs = 14
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dirs/faster_rcnn_r101_fpn_1x'
+work_dir = './work_dirs/coco2014'
 load_from = None
 # resume_from = 'work_dirs/faster_rcnn_r101_fpn_1x/epoch_12.pth'
 resume_from = None
