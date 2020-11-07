@@ -1,2 +1,3 @@
 0.18023252487182617 -------- ../checkpoints/coco_65_15/classifier_best_12.pth 
 0.17925596237182617 -------- ../checkpoints/coco_65_15_e2/classifier_best_12.pth 
+0.1926453560590744 -------- ../checkpoints/coco_65_15/classifier_best_27.pth 

@@ -8,7 +8,6 @@ import math
 from util import *
 import model
 from cls_models import ClsModel, ClsUnseen
-from contrastive_loss import SupConLoss, ConLossReal, AttFeatsCon
 
 class TrainGAN():
     def __init__(self, opt, attributes, unseenAtt, unseenLabels, seen_feats_mean, gen_type='FG'):
@@ -23,19 +22,15 @@ class TrainGAN():
         '''
         self.opt = opt
 
-        self.con_real = ConLossReal(seen_feats_mean)
         self.gen_type = gen_type
-        # self.Wu_Labels = np.array([i for i, l in enumerate(unseenLabels)])
-        self.Wu_Labels = unseenLabels#np.array([i for i, l in enumerate(unseenLabels)])
+        self.Wu_Labels = np.array([i for i, l in enumerate(unseenLabels)])
         print(f"Wu_Labels {self.Wu_Labels}")
         self.Wu = unseenAtt
 
         self.unseen_classifier = ClsUnseen(unseenAtt)
         self.unseen_classifier.cuda()
-        self.con_loss = SupConLoss()
-        # self.con_att_feats = AttFeatsCon()
 
-        # self.unseen_classifier = loadUnseenWeights(opt.pretrain_classifier_unseen, self.unseen_classifier)
+        self.unseen_classifier = loadUnseenWeights(opt.pretrain_classifier_unseen, self.unseen_classifier)
         self.classifier = ClsModel(num_classes=opt.nclass_all)
         self.classifier.cuda()
         self.classifier = loadFasterRcnnCLSHead(opt.pretrain_classifier, self.classifier)
@@ -273,27 +268,26 @@ class TrainGAN():
             c_errG = self.cls_criterion(self.classifier(feats=fake, classifier_only=True), Variable(input_label))
             c_errG = self.opt.cls_weight*c_errG
             # --------------------------------------------
-            # unseen start ************************************************************************************
-            # fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
-            # unseenc_errG = self.opt.cls_weight_unseen * self.con_att_feats(fake_unseen_f.cuda(), fake_unseen_l.cuda())
+
+            # unseen 
+            fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
                 
-            # fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
+            fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
 
-            # unseenc_errG = self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
+            unseenc_errG = self.opt.cls_weight_unseen * self.cls_criterion(fake_pred, Variable(fake_unseen_l.cuda()))
 
             
             
-            # seen_con_err =  1.00 * self.con_real(fake, input_label)
 
             # ---------------------------------------------
-            # unseen end ************************************************************************************
+            # Total loss 
 
-            errG = -G_cost + c_errG + loss_lz #+unseenc_errG
+            errG = -G_cost + c_errG + loss_lz + unseenc_errG
             errG.backward()
-            self.optimizerG.step()        
-            # unseen loss: {unseenc_errG.data.item():.4f}
+            self.optimizerG.step()
+
             print(f"{self.gen_type} [{self.epoch+1:02}/{self.opt.nepoch:02}] [{i:06}/{int(self.ntrain)}] \
-            D loss: {D_cost.data.item():.4f} G loss: {G_cost.data.item():.4f}, G SUM: {errG.data.item():.4f}  W dist: {Wasserstein_D.data.item():.4f} \
-            seen loss: {c_errG.data.item():.4f}  loss div: {loss_lz.item():0.4f}")
+            Loss: {errG.item() :0.4f} D loss: {D_cost.data.item():.4f} G loss: {G_cost.data.item():.4f}, W dist: {Wasserstein_D.data.item():.4f} \
+            seen loss: {c_errG.data.item():.4f}  unseen loss: {unseenc_errG.data.item():.4f} loss div: {loss_lz.item():0.4f}")
             
         self.netG.eval()

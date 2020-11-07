@@ -10,7 +10,7 @@ from os import path
 class FeaturesCls(Dataset):
      
     def __init__(self, opt, features=None, labels=None, val=False, split='seen', classes_to_train=None):
-        self.root = f"{opt.dataroot}/{opt.dataset}"
+        self.root = f"{opt.dataroot}"
         self.opt = opt
         self.classes_to_train = classes_to_train
         self.classid_tolabels = None
@@ -48,7 +48,7 @@ class FeaturesCls(Dataset):
 
 class FeaturesGAN():
     def __init__(self, opt):
-        self.root = f"{opt.dataroot}/{opt.dataset}"
+        self.root = f"{opt.dataroot}"
         self.opt = opt
         # self.attribute = np.load(opt.class_embedding)
 

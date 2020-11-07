@@ -20,9 +20,29 @@ class ClsUnseen(torch.nn.Module):
         super(ClsUnseen, self).__init__()
         self.W = att.type(torch.float).cuda()
         self.fc1 = nn.Linear(in_features=1024, out_features=300, bias=True)
+        self.lsm = nn.LogSoftmax(dim=1)
+
         print(f"__init__ {self.W.shape}")
 
     def forward(self, feats=None, classifier_only=False):
         f = self.fc1(feats)
         x = f.mm(self.W.transpose(1,0))
+        x = self.lsm(x)
+
+        return x
+
+class ClsUnseenTrain(torch.nn.Module):
+    def __init__(self, att):
+        super(ClsUnseen, self).__init__()
+        self.W = att.type(torch.float).cuda()
+        self.fc1 = nn.Linear(in_features=1024, out_features=300, bias=True)
+        self.lsm = nn.LogSoftmax(dim=1)
+
+        print(f"__init__ {self.W.shape}")
+
+    def forward(self, feats=None, classifier_only=False):
+        f = self.fc1(feats)
+        x = f.mm(self.W.transpose(1,0))
+        # x = self.lsm(x)
+
         return x

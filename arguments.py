@@ -22,7 +22,7 @@ def parse_args():
     parser.add_argument('--lr', type=float, default=0.0001, help='learning rate to train GANs ')
     parser.add_argument('--lr_cls', type=float, default=0.0001, help='learning rate to train CLS ')
     parser.add_argument('--testsplit', default='test', help='unseen classes feats and labels paths')
-    parser.add_argument('--trainsplit', default='seen', help='seen classes feats and labels paths')
+    parser.add_argument('--trainsplit', default='train', help='seen classes feats and labels paths')
 
     parser.add_argument('--beta1', type=float, default=0.5, help='beta1 for adam. default=0.5')
     parser.add_argument('--lz_ratio', type=float, default=1.0, help='mode seeking loss weight')
