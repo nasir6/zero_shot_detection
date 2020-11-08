@@ -29,7 +29,7 @@ Weights of FasterRCNN trained on [MSCOCO2014](https://drive.google.com/drive/fol
 ### 1. Train Detector
 
     cd mmdetection
-    /tools/dist_train.sh configs/faster_rcnn_r101_fpn_1x.py 8 --validate
+    ./tools/dist_train.sh configs/faster_rcnn_r101_fpn_1x.py 8 --validate
 
 
 ### 2. extract features

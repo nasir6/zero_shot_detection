@@ -11,3 +11,4 @@ logs/*
 ._*
 nocommitac.md
 __pycache__
+*.ipynb_checkpoints/*

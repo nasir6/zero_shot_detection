@@ -7,9 +7,7 @@ from mmdet.core import (auto_fp16, bbox_target, delta2bbox, force_fp32,
                         multiclass_nms)
 from ..builder import build_loss
 from ..losses import accuracy
-from ..losses import SupConLoss, AttFeatsCon
 from ..registry import HEADS
-from .cls_model import ClsModel2
 
 
 @HEADS.register_module
@@ -49,8 +47,6 @@ class BBoxHead(nn.Module):
 
         self.loss_cls = build_loss(loss_cls)
         self.loss_bbox = build_loss(loss_bbox)
-        # self.contrastive_loss = SupConLoss()
-        # self.contrastive_loss_att_feats = AttFeatsCon()
 
         in_channels = self.in_channels
         if self.with_avg_pool:
@@ -58,7 +54,6 @@ class BBoxHead(nn.Module):
         else:
             in_channels *= self.roi_feat_area
         if self.with_cls:
-            # self.fc_cls = ClsModel2(in_channels)
             self.fc_cls = nn.Linear(in_channels, num_classes)
         if self.with_reg:
             out_dim_reg = 4 if reg_class_agnostic else 4 * num_classes

@@ -3,7 +3,6 @@ import torch.nn as nn
 from ..registry import HEADS
 from ..utils import ConvModule
 from .bbox_head import BBoxHead
-from .cls_model import ClsModel2
 import torch
 
 @HEADS.register_module
@@ -76,7 +75,6 @@ class ConvFCBBoxHead(BBoxHead):
         # reconstruct fc_cls and fc_reg since input channels are changed
         if self.with_cls:
             self.fc_cls = nn.Linear(self.cls_last_dim, self.num_classes)
-            # self.fc_cls = ClsModel2(self.cls_last_dim)
         if self.with_reg:
             out_dim_reg = (4 if self.reg_class_agnostic else 4 *
                            self.num_classes)
