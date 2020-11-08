@@ -12,7 +12,7 @@ python trainer.py --manualSeed 806 \
 --trainsplit train_0.6_0.3 \
 --classes_split 65_15 \
 --lz_ratio 0.01 \
---outname checkpoints/coco_65_15_e2 \
+--outname checkpoints/coco_65_15 \
 
 
 
