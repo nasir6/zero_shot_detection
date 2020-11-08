@@ -1,8 +1,9 @@
 mmdetection/work_dirs/*
 mmdetection/backbones/*
 mmdetection/*.out
+mmdetection/work_dir/*
 */*.csv
-*.pth
+# *.pth
 # */*.npy
 logs/*
 */*.pkl

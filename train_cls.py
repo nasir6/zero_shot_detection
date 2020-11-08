@@ -8,7 +8,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 import numpy as np
 from dataset import *
-from cls_models import ClsModel
+from cls_models import ClsModelTrain
 from mmdetection.splits import get_unseen_class_ids, get_unseen_class_labels 
 
 class TrainCls():
@@ -20,7 +20,7 @@ class TrainCls():
         self.best_acc = -100000
         self.isBestIter = False
         self.criterion = nn.CrossEntropyLoss()
-        self.con_loss = SupConLoss()
+        # self.criterion = nn.NLLLoss()
 
         self.dataset = None 
         self.val_accuracies = []
@@ -28,7 +28,7 @@ class TrainCls():
         self.best_epoch = 0
 
     def init_model(self):
-        self.classifier = ClsModel(num_classes=len(self.classes_to_train))
+        self.classifier = ClsModelTrain(num_classes=len(self.classes_to_train))
         self.classifier.cuda()
         self.optimizer = optim.Adam(self.classifier.parameters(), lr=self.opt.lr_cls, betas=(0.5, 0.999))
 
@@ -68,12 +68,10 @@ class TrainCls():
                 in_label = in_label.cuda()
                 preds = self.classifier(feats=in_feat, classifier_only=True)
                 
-                ce_loss = self.criterion(preds, in_label)
-                con_loss = 0.0 * self.con_loss(in_feat, in_label)
+                loss = self.criterion(preds, in_label)
 
-                loss_epoch+=ce_loss.item()
+                loss_epoch+=loss.item()
 
-                loss = ce_loss + con_loss
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
@@ -90,7 +88,7 @@ class TrainCls():
             self.val_accuracies.append(self.all_acc)
 
             if self.best_acc <= self.valacc:
-                torch.save({'state_dict': self.classifier.state_dict(), 'epoch': epoch}, f"{self.opt.outname}/classifier_best_{self.gan_epoch}.pth")
+                torch.save({'state_dict': self.classifier.state_dict(), 'epoch': epoch}, f"{self.opt.outname}/classifier_best.pth")
                 print(f"saved best model best accuracy : {self.valacc:0.6f}")
                 self.isBestIter = True
                 np.save(f'{self.opt.outname}/confusion_matrix_Test.npy', c_mat_test)
@@ -101,7 +99,7 @@ class TrainCls():
         
         _,_, c_mat_train = compute_per_class_acc(np.concatenate(gt_all), np.concatenate(preds_all), self.opt, verbose='Train')
         np.save(f'{self.opt.outname}/confusion_matrix_Train.npy', c_mat_train)
-        torch.save({'state_dict': self.classifier.state_dict(), 'epoch': epoch}, f"{self.opt.outname}/classifier_latest_{self.gan_epoch}.pth")
+        torch.save({'state_dict': self.classifier.state_dict(), 'epoch': epoch}, f"{self.opt.outname}/classifier_latest.pth")
 
         print(f"[{self.best_epoch:04}] best model accuracy {self.best_acc}")
 

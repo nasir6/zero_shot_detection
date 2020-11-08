@@ -72,7 +72,7 @@ def plot_confusion_matrix(c_mat, xtick_marks, ytick_marks, opt, dataset='val', p
             bbox=dict(boxstyle='round', facecolor='white', edgecolor='0.3'))
 
     fig = plt.gcf()
-    fig.savefig(f'{opt.outname}/{prefix}_voc_confusion_matrix_{dataset}.pdf', format='pdf', dpi=600)
+    fig.savefig(f'{opt.outname}/{prefix}_confusion_matrix_{dataset}.pdf', format='pdf', dpi=600)
     plt.close()
 # c_mat = np.load(f'confusion_matrix_Train.npy')
 # classes = np.concatenate((['background'], ['car', 'dog', 'sofa', 'train']))
