@@ -63,7 +63,8 @@ sudo pkill -SIGHUP dockerd
 ```sh
 docker run --runtime=nvidia --rm nvidia/cuda:9.0-devel nvidia-smi
 ```
-
+### Pull the docker image
+- [Pull Docker Image](dockerRun.md).
 
 For more details on Docker CE installation [docker-ce](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 

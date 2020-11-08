@@ -79,7 +79,7 @@ def compute_per_class_acc(test_label, predicted_label, opt, verbose="Val"):
 
 def loadUnseenWeights(file_path, model):
     checkpoint = torch.load(file_path)
-    model.load_state_dict(checkpoint['state_dict'])
+    model.load_state_dict(checkpoint)
     return model
 
 def loadFasterRcnnCLSHead(filepath, model):

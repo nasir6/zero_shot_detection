@@ -6,7 +6,6 @@ from ..registry import HEADS
 from ..utils import ConvModule
 from .bbox_head import BBoxHead
 
-from .cls_model import ClsModel2
 
 class BasicResBlock(nn.Module):
     """Basic residual block.
@@ -116,7 +115,6 @@ class DoubleConvFCBBoxHead(BBoxHead):
         self.fc_reg = nn.Linear(self.conv_out_channels, out_dim_reg)
 
         self.fc_cls = nn.Linear(self.fc_out_channels, self.num_classes)
-        # self.fc_cls = ClsModel2(self.fc_out_channels)
         self.relu = nn.ReLU(inplace=True)
 
     def _add_conv_branch(self):

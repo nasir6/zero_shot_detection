@@ -1,12 +1,15 @@
 mmdetection/work_dirs/*
 mmdetection/backbones/*
 mmdetection/*.out
+mmdetection/work_dir/*
 */*.csv
-*.pth
+# *.pth
 # */*.npy
+logs/*
 */*.pkl
 *.png
 */*.DS_Store
 ._*
 nocommitac.md
 __pycache__
+*.ipynb_checkpoints/*

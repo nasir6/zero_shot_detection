@@ -15,6 +15,10 @@ docker run -p 3000:3000 -v codes/:/codes -it --runtime=nvidia --rm nasir6/mmdete
 
 cd /codes/zero_shot_detection/mmdetection
 
+# install the mmdetection library
+
+python setup.py develop
+
 # to test the synthesized classifier on MSCOCO. 
 
 test
