@@ -10,7 +10,6 @@ import numpy as np
 from dataset import *
 from cls_models import ClsModel
 from mmdetection.splits import get_unseen_class_ids, get_unseen_class_labels 
-from contrastive_loss import SupConLoss
 
 class TrainCls():
     def __init__(self, opt):
@@ -83,7 +82,7 @@ class TrainCls():
                 gt_all.append(in_label.data.cpu().numpy())
                 
                 if ite % 30 == 29:
-                    print(f'Cls Train Epoch [{epoch+1:02}/{self.opt.nepoch_cls}] Iter [{ite:05}/{len(self.dataloader)}]{ite/len(self.dataloader) * 100:02.3f}% Loss: {loss_epoch/ite :0.4f} Con Loss: {con_loss.item():0.4f} lr: {get_lr(self.optimizer):0.6f}')
+                    print(f'Cls Train Epoch [{epoch+1:02}/{self.opt.nepoch_cls}] Iter [{ite:05}/{len(self.dataloader)}]{ite/len(self.dataloader) * 100:02.3f}% Loss: {loss_epoch/ite :0.4f} lr: {get_lr(self.optimizer):0.6f}')
             # validate on test set
             adjust_learning_rate(self.optimizer, epoch, self.opt)
 

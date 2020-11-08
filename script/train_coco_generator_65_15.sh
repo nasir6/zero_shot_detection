@@ -1,5 +1,5 @@
 python trainer.py --manualSeed 806 \
---cls_weight 0.01 --cls_weight_unseen 0.01 --nclass_all 81 --syn_num 250 --val_every 1 \
+--cls_weight 0.001 --cls_weight_unseen 0.001 --nclass_all 81 --syn_num 250 --val_every 1 \
 --cuda --netG_name MLP_G --netD_name MLP_D \
 --nepoch 100 --nepoch_cls 15 --ngh 4096 --ndh 4096 --lambda1 10 --critic_iter 5 \
 --dataset coco --batch_size 32 --nz 300 --attSize 300 --resSize 1024 --gan_epoch_budget 38000 \

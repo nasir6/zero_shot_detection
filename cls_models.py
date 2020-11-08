@@ -12,7 +12,7 @@ class ClsModel(nn.Module):
     def forward(self, feats=None, classifier_only=False):
         x = self.fc1(feats)
         # x = self.relu(self.fc1(feats))
-        x = self.lsm(x)
+        # x = self.lsm(x)
         return x
 
 class ClsUnseen(torch.nn.Module):
@@ -27,7 +27,7 @@ class ClsUnseen(torch.nn.Module):
     def forward(self, feats=None, classifier_only=False):
         f = self.fc1(feats)
         x = f.mm(self.W.transpose(1,0))
-        x = self.lsm(x)
+        # x = self.lsm(x)
 
         return x
 
