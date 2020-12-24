@@ -62,6 +62,20 @@ Weights of FasterRCNN trained on [MSCOCO2014](https://drive.google.com/drive/fol
     # example 
     
     ./tools/dist_test.sh configs/faster_rcnn_r101_fpn_1x.py work_dir/coco2014/epoch_12.pth 8 --dataset coco --out coco_results.pkl --zsd --syn_weights ../checkpoints/coco_65_15/classifier_best_137.pth
+    
+### Citation 
+If you use this code for your research, please consider citing:
+
+```
+    @misc{hayat2020synthesizing,
+      title={Synthesizing the Unseen for Zero-shot Object Detection}, 
+      author={Nasir Hayat and Munawar Hayat and Shafin Rahman and Salman Khan and Syed Waqas Zamir and Fahad Shahbaz Khan},
+      year={2020},
+      eprint={2010.09425},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+    }
+```
 ### Results
 - MSCOCO 
 
