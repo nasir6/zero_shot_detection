@@ -101,7 +101,7 @@ class TrainGAN():
         torch.save({'state_dict': self.netD.state_dict(), 'epoch': self.epoch}, f'{self.opt.outname}/disc_{state}.pth')
         torch.save({'state_dict': self.netG.state_dict(), 'epoch': self.epoch}, f'{self.opt.outname}/gen_{state}.pth')
 
-    def generate_syn_feature(self, labels, attribute, num=100):
+    def generate_syn_feature(self, labels, attribute, num=100, no_grad=True):
         """
         generates features
         inputs:
@@ -123,8 +123,18 @@ class TrainGAN():
         if self.opt.cuda:
             syn_att = syn_att.cuda()
             syn_noise = syn_noise.cuda()
-        
-        with torch.no_grad():
+        if no_grad is True:
+            with torch.no_grad():
+                for i in range(nclass):
+                    label = labels[i]
+                    iclass_att = attribute[i]
+                    syn_att.copy_(iclass_att.repeat(num, 1))
+                    syn_noise.normal_(0, 1)
+                    output = self.netG(Variable(syn_noise), Variable(syn_att))
+                
+                    syn_feature.narrow(0, i*num, num).copy_(output.data.cpu())
+                    syn_label.narrow(0, i*num, num).fill_(label)
+        else:
             for i in range(nclass):
                 label = labels[i]
                 iclass_att = attribute[i]
@@ -270,7 +280,7 @@ class TrainGAN():
             # --------------------------------------------
 
             # unseen 
-            fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4)
+            fake_unseen_f, fake_unseen_l = self.generate_syn_feature(self.Wu_Labels, self.Wu, num=self.opt.batch_size//4, no_grad=False)
                 
             fake_pred = self.unseen_classifier(feats=fake_unseen_f.cuda(), classifier_only=True)
 
