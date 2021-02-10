@@ -1,6 +1,12 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-ms-coco)](https://paperswithcode.com/sota/zero-shot-object-detection-on-ms-coco?p=synthesizing-the-unseen-for-zero-shot-object)
 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/generalized-zero-shot-object-detection-on-ms)](https://paperswithcode.com/sota/generalized-zero-shot-object-detection-on-ms?p=synthesizing-the-unseen-for-zero-shot-object)
 
-## Synthesizing the Unseen for Zero-shot Object Detection
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-pascal-voc-07)](https://paperswithcode.com/sota/zero-shot-object-detection-on-pascal-voc-07?p=synthesizing-the-unseen-for-zero-shot-object)
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-ilsvrc-det-2017)](https://paperswithcode.com/sota/zero-shot-object-detection-on-ilsvrc-det-2017?p=synthesizing-the-unseen-for-zero-shot-object)
+
+## Code for [ACCV 2020](https://openaccess.thecvf.com/content/ACCV2020/papers/Hayat_Synthesizing_the_Unseen_for_Zero-shot_Object_Detection_ACCV_2020_paper.pdf)  Synthesizing the Unseen for Zero-shot Object Detection
 
 Zero Shot Detection (ZSD) is a recently introduced paradigm which enables simultaneous localization and classification of previously unseen objects. It is arguably the most extreme case of learning with minimal supervision. we propose a symantically driven conditional feature generation module to synthesize visual features for unseen objects. 
 
