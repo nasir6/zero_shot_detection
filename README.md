@@ -4,7 +4,7 @@
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-pascal-voc-07)](https://paperswithcode.com/sota/zero-shot-object-detection-on-pascal-voc-07?p=synthesizing-the-unseen-for-zero-shot-object)
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-ilsvrc-det-2017)](https://paperswithcode.com/sota/zero-shot-object-detection-on-ilsvrc-det-2017?p=synthesizing-the-unseen-for-zero-shot-object)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/synthesizing-the-unseen-for-zero-shot-object/zero-shot-object-detection-on-imagenet)](https://paperswithcode.com/sota/zero-shot-object-detection-on-imagenet?p=synthesizing-the-unseen-for-zero-shot-object)
 
 ## Code for [ACCV 2020](https://openaccess.thecvf.com/content/ACCV2020/papers/Hayat_Synthesizing_the_Unseen_for_Zero-shot_Object_Detection_ACCV_2020_paper.pdf)  Synthesizing the Unseen for Zero-shot Object Detection
 
